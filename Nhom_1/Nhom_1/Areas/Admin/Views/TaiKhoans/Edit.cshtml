@@ -1,0 +1,191 @@
+﻿@model Nhom_1.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Sửa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var ImagePath = "~/wwwroot/images/accounts/" + Model.Anh_TK;
+}
+
+<div class="right_col" role="main">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Sửa thông tin</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>@Model.Ten_TK</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="">Cài đặt 1</a>
+                                <a class="dropdown-item" href="">Cài đặt 2</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-horizontal">
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="@Model.Ma_TK" method="post" enctype='multipart/form-data'>
+                            @Html.AntiForgeryToken()
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="maDM">Mã tài khoản<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="maDM" required="required" class="form-control" name="maTK" value="@Model.Ma_TK" readonly>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenDM">Tên tài khoản<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="tenDM" required="required" class="form-control" name="tenTK" value="@Model.Ten_TK" readonly>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="maDM">Mật khẩu<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="maDM" required="required" class="form-control" name="matKhau" value="@Model.MatKhau_TK" readonly>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenDM">Họ tên<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="tenDM" required="required" class="form-control" name="hoTen" value="@Model.HoTen_TK" readonly>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="maDM">Tuổi<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="maDM" required="required" class="form-control" name="tuoi" value="@Model.Tuoi_TK" readonly>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenDM">Địa chỉ<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="tenDM" required="required" class="form-control" name="diaChi" value="@Model.DiaChi_TK" readonly>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="maDM">Số điện thoại<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="maDM" required="required" class="form-control" name="dienThoai" value="@Model.DienThoai_TK" readonly>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenDM">Email<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="tenDM" required="required" class="form-control" name="email" value="@Model.Email_TK" readonly>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="maDM">Trạng thái<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    @if (Model.TrangThai_TK == 1)
+                                    {
+                                        <select name="trangThai" class="form-control">
+                                            <option value="1" selected>Mở</option>
+                                            <option value="0">Khóa</option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select name="trangThai" class="form-control">
+                                            <option value="1">Mở</option>
+                                            <option value="0" selected>Khóa</option>
+                                        </select>
+                                    }
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenDM">Quyền<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    @if (Model.MaQuyen == 1)
+                                    {
+                                        <select name="quyen" class="form-control">
+                                            <option value="1" selected>Quản trị viên</option>
+                                            <option value="2">Thành viên</option>
+                                            <option value="3">Quản lý sản phẩm</option>
+                                            <option value="4">Quản lý đơn hàng</option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        if (Model.MaQuyen == 2)
+                                        {
+                                            <select name="quyen" class="form-control">
+                                                <option value="1">Quản trị viên</option>
+                                                <option value="2" selected>Thành viên</option>
+                                                <option value="3">Quản lý sản phẩm</option>
+                                                <option value="4">Quản lý đơn hàng</option>
+                                            </select>
+                                        }
+                                        else
+                                        {
+                                            if (Model.MaQuyen == 3)
+                                            {
+                                                <select name="quyen" class="form-control">
+                                                    <option value="1">Quản trị viên</option>
+                                                    <option value="2">Thành viên</option>
+                                                    <option value="3" selected>Quản lý sản phẩm</option>
+                                                    <option value="4">Quản lý đơn hàng</option>
+                                                </select>
+                                            }
+                                            else
+                                            {
+                                                <select name="quyen" class="form-control">
+                                                    <option value="1">Quản trị viên</option>
+                                                    <option value="2">Thành viên</option>
+                                                    <option value="3">Quản lý sản phẩm</option>
+                                                    <option value="4" selected>Quản lý đơn hàng</option>
+                                                </select>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="uploadimage">
+                                <img id="outputImage" class="img-rounded" alt="Ảnh" width="200" height="300" src="@Url.Content(@ImagePath)" style="margin-left:135px"/>
+                                <p><label for="ufile1" style="cursor: pointer; margin-left:135px">Ảnh<span class="required">*</span></label></p>
+                            </div>
+                            <br/>
+                            <button style="margin-left: 452px" class="btn btn-success" type="submit">Lưu</button>
+                            <a href="@Url.Action("Index")" style="margin-left: 70px" class="btn btn-primary">Trở về</a>
+                        </form>
+                    </div>
+                    @if (ViewBag.Error != null)
+                    {
+                        <br/>
+                        <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .uploadimage {
+        display: inline-block;
+        text-align: center;
+        margin: 0px -200px 0px 320px;
+    }
+</style>
+<script>
+    var loadFile = function (event) {
+        var icon = document.getElementById('outputIcon');
+        icon.src = URL.createObjectURL(event.target.files[0]);
+    };
+    var loadFile1 = function (event) {
+        var image = document.getElementById('outputImage');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>

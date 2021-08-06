@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="vn">
+    <head>
+        <title>Vũ trụ nước hoa - Nước hoa xách tay chính hãng Mỹ uy tín giá rẻ tại TP.HCM</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="~/wwwroot/css/mystyle.css">
+        <link href="/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+        <style type="text/css">
+            .bottommenu {
+                bottom: -30px;
+            }
+
+            .linemenu {
+                background: #f9fafb;
+                padding: 3px 0;
+                text-align: center;
+                text-transform: uppercase;
+                font-size: 15px;
+                display: flex;
+            }
+
+            .linemenu::after {
+                content: '';
+                display: block;
+                clear: both;
+            }
+
+            .linemenu .khungmn {
+                width: 80%;
+                float: right;
+                margin-top: 20px;
+            }
+
+            .linemenu .logohome {
+                width: 20%;
+                float: left;
+                z-index: 1000;
+                margin: 0;
+            }
+
+            .linemenu .logohome img {
+                max-width: 100%;
+            }
+
+            .linemenu {
+                position: relative;
+            }
+
+            .linemenu a {
+                display: inline-block;
+                margin: 0 10px;
+                background: none;
+                padding: 0;
+                color: #555;
+            }
+
+            .search {
+                width: 45%;
+                margin: 0 auto;
+                padding: 10px 0;
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+
+            .search input {
+                display: block;
+                height: 42px;
+                width: 90%;
+                margin: 0 auto;
+                border: 2px solid #ccc;
+                background-size: 1px 8px;
+                border-radius: 15px;
+                text-align: center;
+                font-style: italic;
+                letter-spacing: 2px;
+                margin: 0;
+                float: left;
+                box-sizing: border-box;
+            }
+
+            .account {
+                width: 270px;
+                font-size: 12px;
+                margin-right: 25px;
+            }
+
+            #register {
+                margin-top: 15px;
+                line-height: 35px;
+                margin-right: 25px;
+            }
+
+            #register span {
+                bottom: 0px;
+            }
+
+            .account img {
+                max-width: 20px;
+                margin-right: 10px;
+                margin-bottom: 12px;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: Verdana, sans-serif;
+            }
+
+            .swiper-slide {
+                display: none;
+            }
+
+            img {
+                vertical-align: middle;
+            }
+
+            .active {
+                background-color: #717171;
+            }
+
+            .fade {
+                -webkit-animation-name: fade;
+                -webkit-animation-duration: 1.5s;
+                animation-name: fade;
+                animation-duration: 1.5s;
+            }
+
+            #register {
+                margin-top: 13px;
+            }
+
+            .addtocard {
+                display: block;
+                padding: 3px 5px;
+                box-sizing: border-box;
+                text-align: center;
+                color: #fff;
+                background: #111111;
+                cursor: pointer;
+            }
+
+            .addtocard img {
+                max-width: 20px;
+                margin-right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Phần nội dung -->
+        <div id="content">
+            <a href="@Url.Action("Cart", "Home")" class="cart"><span>0</span></a>
+            <!-- Phần menu -->
+            @{
+                Html.RenderPartial("_Menu");
+            }
+            <!-- Hết phần menu -->
+            <div class="search">
+                <a href="@Url.Action("Search", "Home")">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm ở đây" name="txtKey">
+                </a>
+            </div>
+            <!-- Phần danh mục sản phẩm -->
+            <div class="relative">
+                <div class="slide08-container">
+                    @RenderSection("SlideShow", required: false)
+                </div>
+                <div class="bottommenu">
+                    @{
+                        Html.RenderAction("Category", "Home");
+                    }
+                </div>
+            </div>
+            <!-- Hết phần danh mục sản phẩm -->
+            <br />&nbsp;
+            @RenderBody()
+        </div>
+        <!-- Hết phần nội dung -->
+        <!-- Phần footer -->
+        @{
+            Html.RenderPartial("_Footer");
+        }
+        <!-- Hết phần footer -->
+    </body>
+</html>

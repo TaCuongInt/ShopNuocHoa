@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Nhom_1.Models.SanPham>
+
+@{
+    ViewBag.Title = "Kết quả tìm kiếm";
+}
+
+<div class="main">
+    <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Index", "Home")"><span itemprop="name" title="Trang chủ">Trang chủ</span></a> ❯ <meta itemprop="position" content="1">
+        </li>
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Search", "Home")" title="Tìm nước hoa theo nhu cầu"><span itemprop="name">Tìm nước hoa theo nhu cầu</span></a> ❯ <meta itemprop="position" content="2">
+        </li>
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="" title="Tìm nước hoa theo nhu cầu"><span itemprop="name">Kết quả tìm kiếm</span></a><meta itemprop="position" content="2">
+        </li>
+    </ol>
+    <div class="clr"></div>
+    <div class="titleheading"><h3>KẾT QUẢ TÌM KIẾM</h3></div>
+    <style type="text/css">
+        .topsearch {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .topsearch .main {
+            background: rgba(255,255,255,0.95);
+            border-radius: 3px;
+        }
+
+        .topsearch a.logo {
+            display: block;
+            width: 25%;
+            float: left;
+        }
+
+        .topsearch a.logo img {
+            max-width: 100%;
+            max-height: 60px;
+        }
+
+        .topsearch .search {
+            width: 100%;
+        }
+
+        .topsearch .search {
+            height: 34px;
+            line-height: 34px;
+        }
+
+        .topsearch .search input {
+            height: 32px;
+            line-height: 32px;
+            width: 100%;
+            padding: 0 5px;
+            border: 0.5px solid #ccc;
+            background: #fff;
+            display: block;
+            float: left;
+            text-align: left;
+            border-radius: 0;
+        }
+
+        .topsearch .search select {
+            height: 32px;
+            line-height: 32px;
+            width: 16.66%;
+            padding: 0 2px;
+            border: 0.5px solid #ccc;
+            background: #fff;
+            display: block;
+            float: left;
+        }
+
+        .topsearch .search span.submit {
+            height: 32px;
+            line-height: 32px;
+            width: 10%;
+            padding: 0 10px;
+            display: block;
+            float: left;
+            border-radius: 0;
+            cursor: pointer;
+            background: #999 url(../../wwwroot/images/icons/search74.png) center center no-repeat;
+            background-size: 20px;
+            margin-top: 20px;
+        }
+
+        .topsearch .search span.submit:hover {
+            background-color: #7f8fa6;
+        }
+    </style>
+    @if (Model.Count() > 0)
+    {
+        <ul class="box">
+            @foreach (var item in Model)
+            {
+                <li class="product procart" style="text-align:center">
+                    <a href="@Url.Action("Product_Detail", "Home", new { id = item.Ma_SP })" title="@item.Ten_SP" class="img flex rotate">
+                        @{
+                            string ImagePath = "~/wwwroot/images/products/" + item.Anhs.Where(a => a.Ma_SP == item.Ma_SP).Select(b => b.DuongDanAnh).First();
+                        }
+                        <img src="@Url.Content(ImagePath)" data=@ImagePath alt="@item.Ten_SP" class="lazy" />
+                    </a>
+                    <a href="@Url.Action("Product_Detail", "Home", new { id = item.Ma_SP })" title="@item.Ten_SP">
+                        <h3>@item.Ten_SP</h3>
+                    </a>
+                    <span class="giaban">@item.GiaBan_SP VND</span>
+                    <div class="addtocard">
+                        <a href="@Url.Action("Product_To_Cart", "Home", new { id = item.Ma_SP })" style="color:white"><img src="~/wwwroot/images/icons/cart.png">Thêm vào giỏ</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <img src="~/wwwroot/images/icons/no_results_found.png" width="363" height="438" style="margin: 15px 0px">
+    }
+    <div>
+        <span style="color:#2980b9"><strong>CÁC LƯU Ý KHI MUA HÀNG</strong></span>
+        <ul bullet="ullike">
+            <li>1. Địa chỉ mua hàng: <strong><span style="color:#c0392b">142D/18 Cô Giang, Phường 2, Phú Nhuận, Tp.HCM</span></strong> ( Đi hết đường cô giang quẹo phải rồi quẹo trái là hẻm 142D)</li>
+            <li>2. Vui lòng liên hệ: <span style="color:#c0392b"><strong>028.730.10688</strong></span>&nbsp;để được giải đáp và hỗ trợ tư vấn.</li>
+            <li>3. Vui lòng kiểm tra kỹ hóa đơn, số tiền thừa&nbsp;trước&nbsp;khi rời quầy thanh toán.</li>
+            <li>4. Mọi khiếu nại về thanh toán không được giải quyết sau khi rời quầy thanh toán.</li>
+            <li>5. Cam kết chính hãng 100% - Phát hiện <strong>hàng Fake 1 Đền 10</strong></li>
+            <li>6. Chính sách&nbsp;bảo hành chuyên nghiệp - <strong>1 ĐỔI 1 TRONG 2 THÁNG&nbsp;</strong></li>
+        </ul>&nbsp;
+    </div>
+</div>

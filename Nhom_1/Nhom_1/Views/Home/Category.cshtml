@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Nhom_1.Models.DanhMucSP>
+
+@{
+    ViewBag.Title = "Danh mục";
+}
+
+<div class="main">
+    <a class="prev" onclick="plusCategories(-1)" style="margin-left: -41px">&#10094;</a>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li class="myCategories">
+                <a href="@Url.Action("Product_Category", "Home", new { id = item.Ma_DM })" title="@item.Ten_DM">
+                    @{
+                        string imagePath = "~/wwwroot/images/icons/" + item.Icon;
+                    }
+                    <img src="@Url.Content(imagePath)" alt="@item.Ten_DM" />
+                    <span>@item.Ten_DM</span>
+                </a>
+            </li>
+        }
+    </ul>
+    <a class="next" onclick="plusCategories(1)">&#10095;</a>
+</div>
+<style>
+    .myCategories {
+        display: none;
+    }
+
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+    }
+
+    .next {
+        border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
+    }
+</style>
+<script>
+    var categoryIndex = 1;
+
+    showCategories(categoryIndex);
+
+    function plusCategories(n) {
+        showCategories(categoryIndex += n);
+    }
+
+    function showCategories(n) {
+        var i;
+        var Categories = document.getElementsByClassName("myCategories");
+        if (n > Categories.length) {
+            categoryIndex = 1
+        }
+        if (n < 1) {
+            categoryIndex = Categories.length
+        }
+        if (categoryIndex <= Categories.length - 5) {
+            for (i = 0; i < Categories.length; i++) {
+                Categories[i].style.display = "none";
+            }
+            for (i = -1; i < 5; i++) {
+                Categories[categoryIndex + i].style.display = "block";
+            }
+        }
+        else {
+            plusCategories(1);
+        }
+    }
+</script>

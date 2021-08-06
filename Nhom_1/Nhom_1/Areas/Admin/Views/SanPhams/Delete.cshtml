@@ -1,0 +1,154 @@
+﻿@model Nhom_1.Models.SanPham
+@{
+    ViewBag.Title = "Xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="right_col" role="main">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Xóa sản phẩm</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>@Model.Ten_SP</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Cài đặt 1</a>
+                                <a class="dropdown-item" href="#">Cài đặt 2</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-horizontal">
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="maSP">Mã sản phẩm<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="maSP" required="required" class="form-control " name="maSP" value="@Model.Ma_SP" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenSP">Tên sản phẩm<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="tenSP" required="required" class="form-control " name="tenSP" value="@Model.Ten_SP" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenDM">Danh mục<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="tenDM" required="required" class="form-control " name="tenDM" value="@Model.DanhMucSP.Ten_DM" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="thuongHieu">Thương hiệu<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="thuongHieu" required="required" class="form-control " name="thuongHieu" value="@Model.ThuongHieu_SP" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="muiHuong">Mùi hương<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="muiHuong" required="required" class="form-control " name="muiHuong" value="@Model.MuiHuong_SP" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="mucDich">Mục đích sử dụng<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="mucDich" required="required" class="form-control " name="mucDich" value="@Model.MucDich_SP" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="soLuong">Số lượng<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="soLuong" required="required" class="form-control " name="soLuong" value="@Model.SoLuong_SP" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nongDo">Nồng độ<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="nongDo" required="required" class="form-control " name="nongDo" value="@Model.NongDo_SP" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="dungTich">Dung tích<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="dungTich" required="required" class="form-control " name="dungTich" value="@Model.DungTich_SP" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="giaBan">Giá bán<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @{
+                                    string giaBan = Convert.ToDecimal(Model.GiaBan_SP).ToString("###,###,###");
+                                }
+                                <input type="text" id="giaBan" required="required" class="form-control " name="giaBan" value="@giaBan" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="moTa">Mô tả<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <textarea type="text" id="moTa" required="required" class="form-control " name="moTa" value="@Model.MoTa_SP" rows="5" readonly>@Model.MoTa_SP</textarea>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="thuongHieu">Thương hiệu<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="thuongHieu" required="required" class="form-control " name="thuongHieu" value="@Model.ThuongHieu_SP" readonly>
+                            </div>
+                        </div>
+                        <div class="imageupload">
+                            @{
+                                int i = 1;
+                                foreach (var item in Model.Anhs)
+                                {
+                                    var ImagePath = "~/wwwroot/images/products/" + item.DuongDanAnh;
+                                    <div class="uploadimage">
+                                        <img id="outputImage" class="img-rounded" alt="Ảnh @i" width="200" height="200" src="@Url.Content(@ImagePath)" />
+                                        <p><label for="ufile1" style="cursor: pointer">Ảnh @i<span class="required">*</span></label></p>
+                                    </div>
+                                    i++;
+                                }
+                            }
+                        </div>
+                        <br />
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype='multipart/form-data'>
+                            @Html.AntiForgeryToken()
+                            <div class="form-actions no-color">
+                                <button style="margin-left: 470px" class="btn btn-success" type="submit">Xóa</button>
+                                <a href="@Url.Action("Index")" style="margin-left: 70px" class="btn btn-primary">Trở về</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .uploadimage {
+        display: inline-block;
+        text-align: center;
+        margin: 0px 20px 0px 0px;
+    }
+
+    .imageupload {
+        text-align: center;
+    }
+
+    .mybutton {
+        text-align: center;
+    }
+</style>

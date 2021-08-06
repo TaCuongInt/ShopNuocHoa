@@ -1,0 +1,154 @@
+﻿@model IEnumerable<Nhom_1.Models.SanPham>
+
+@{
+    ViewBag.Title = "Trang chủ";
+}
+
+@section SlideShow{
+    <div class="swiper-slide fade">
+        <a href="" title="Nước Hoa Mỹ | Nước hoa nam nữ chính hãng xách tay Mỹ cao cấp giá rẻ TP.HCM">
+            <img src="~/wwwroot/images/images/nuoc-hoa-my--nuoc-hoa-nam-nu-chinh-hang-xach-tay-my-cao-cap-gia-re-tphcm-1595213048-4967c6.jpg" alt="Nước Hoa Mỹ | Nước hoa nam nữ chính hãng xách tay Mỹ cao cấp giá rẻ TP.HCM"/>
+        </a>
+    </div>
+    <div class="swiper-slide fade">
+        <a href="" title="Nước Hoa Mỹ | Nước hoa nam nữ chính hãng xách tay Mỹ cao cấp giá rẻ TP.HCM">
+            <img src="~/wwwroot/images/images/nuoc-hoa-my--nuoc-hoa-nam-nu-chinh-hang-xach-tay-my-cao-cap-gia-re-tphcm-1595213225-cd0479.jpg" alt="Nước Hoa Mỹ | Nước hoa nam nữ chính hãng xách tay Mỹ cao cấp giá rẻ TP.HCM"/>
+        </a>
+    </div>
+}
+
+<div class="main">
+    <div class="leftside">
+        <div class="flashsale">
+            <a href="" title="Sản phẩm mới nhất"><img src="~/wwwroot/images/images/eaed2b73c9c161a489262077e4b19efa.jpg" alt="Sản phẩm mới nhất" style="height:500px"/></a>
+        </div>
+    </div>
+    <div class="rightside">
+        <div class="parallelogram">
+            <strong><span>SẢN PHẨM MỚI NHẤT</span></strong>
+        </div>
+        <ul class="box">
+            @foreach (var item in Model.OrderByDescending(p => p.Ma_SP).Take(16))
+            {
+                <li class="product procart" style="text-align:center">
+                    <a href="@Url.Action("Product_Detail", "Home", new { id = item.Ma_SP })" title="@item.Ten_SP" class="img flex rotate">
+                        @{
+                            string ImagePath = "~/wwwroot/images/products/" + item.Anhs.Where(a => a.Ma_SP == item.Ma_SP).Select(b => b.DuongDanAnh).First();
+                        }
+                        <img src="@Url.Content(ImagePath)" data=@ImagePath alt="@item.Ten_SP" class="lazy"/>
+                    </a>
+                    <a href="@Url.Action("Product_Detail", "Home", new { id = item.Ma_SP })" title="@item.Ten_SP"><h3>@item.Ten_SP</h3></a>
+                    @{
+                        string giaban = Convert.ToDecimal(item.GiaBan_SP).ToString("###,###,###");
+                    }
+                    <span class="giaban">@giaban VND</span>
+                    <div class="addtocard">
+                        <a href="@Url.Action("Product_To_Cart", "Home", new { id = item.Ma_SP })" style="color:white"><img src="~/wwwroot/images/icons/cart.png">Thêm vào giỏ</a>
+                    </div>
+                    <input type="hidden" class="listprice" giaban="@item.GiaBan_SP" listcart="" idsp="@item.Ma_SP">
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<div class="grid" value="col12">
+    <div class="gridcol" cover="full">&nbsp;</div>
+</div>
+
+<div class="main">
+    @{
+        int dm = 1;
+        foreach (var item in Model)
+        {
+            if (item.Ma_DM == dm)
+            {
+                <div class="homeleft">
+                    <div class="parallelogram">
+                        <strong>
+                            <span><a href="@Url.Action("Category", "Home", new { id = item.Ma_DM })" title="@item.DanhMucSP.Ten_DM">@item.DanhMucSP.Ten_DM</a></span>
+                        </strong>
+                    </div>
+                    <ul class="box">
+                        @{
+                            int n = 1;
+                            foreach (var item1 in Model.OrderByDescending(p => p.Ma_SP))
+                            {
+                                if (item1.Ma_DM == dm && n <= 8)
+                                {
+                                    <li class="product procart" style="text-align:center">
+                                        <a href="@Url.Action("Product_Detail", "Home", new { id = item1.Ma_SP })" title="@item1.Ten_SP" class="img flex rotate">
+                                            @{
+                                                string imagePath = "~/wwwroot/images/products/" + item1.Anhs.Where(a => a.Ma_SP == item1.Ma_SP).Select(b => b.DuongDanAnh).First();
+                                            }
+                                            <img src="@Url.Content(imagePath)" data=@imagePath alt="@item1.Ten_SP" class="lazy"/>
+                                        </a>
+                                        <a href="@Url.Action("Product_Detail", "Home", new { id = item1.Ma_SP })" title="@item1.Ten_SP"><h3>@item1.Ten_SP</h3></a>
+                                        @{
+                                            string giaban = Convert.ToDecimal(item1.GiaBan_SP).ToString("###,###,###");
+                                        }
+                                        <span class="giaban">@giaban VND</span>
+                                        <div class="addtocard">
+                                            <a href="@Url.Action("Product_To_Cart", "Home", new { id = item1.Ma_SP })" style="color:white"><img src="~/wwwroot/images/icons/cart.png">Thêm vào giỏ</a>
+                                        </div>
+                                    </li>
+                                    n++;
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="homeright">
+                    <a href="@Url.Action("Product_Category", "Home", new { id = item.DanhMucSP.Ma_DM })" title="@item.DanhMucSP.Ten_DM">
+                        @{
+                            string imagePath1 = "~/wwwroot/images/images/" + item.DanhMucSP.Anh;
+                        }
+                        <img src="@Url.Content(imagePath1)" alt="@item.DanhMucSP.Ten_DM"/>
+                    </a>
+                </div>
+                <div class="clr10"></div>
+                dm++;
+            }
+        }
+    }
+</div>
+<style type="text/css">
+    .bottommenu {
+        bottom: 0px;
+    }
+
+    .flashsale {
+        border: 5px solid #111;
+        padding: 15px;
+        position: relative;
+    }
+
+    .flashsale a.img {
+        display: block;
+        width: 100%;
+        height: 333px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .flashsale a.img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<script type="text/javascript">
+    var slideIndex = 0;
+    showSlides();
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("swiper-slide");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000);
+    }
+</script>

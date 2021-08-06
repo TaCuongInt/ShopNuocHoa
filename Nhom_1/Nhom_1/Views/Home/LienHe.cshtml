@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "Liên hệ";
+}
+
+<div class="main">
+    <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Index", "Home")"><span itemprop="name">Trang chủ</span></a> ❯ <meta itemprop="position" content="1"/>
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Menu", "Home", new { id = "TinTuc" })"><span itemprop="name">Tin tức</span></a> ❯ <meta itemprop="position" content="2"/>
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Menu", "Home", new { id = "LienHe" })"><span itemprop="name">Liên hệ Với Vũ Trụ Nước Hoa</span></a><meta itemprop="position" content="3"/>
+        </li>
+    </ol>
+    <div class="content">
+        <h1 class="head">Liên hệ Với Vũ Trụ Nước Hoa</h1>
+        <div class="fb-like" data-href="@Url.Action("Menu", "Home", new { id = "LienHe" })" data-width="800" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        <div class="grid" space="space2x" value="col66">
+            <div class="gridcol">
+                <div bgcolor="bgfde3a7" border="dashed2px" bordercolor="bg102770" class="proform" color="cffffff" padall="px20">
+                    <h2 font="Anton" style="margin-bottom: 15px">QUÝ KHÁCH CẦN ĐƯỢC HỖ TRỢ GÌ?</h2>
+
+                    <p style="margin-bottom: 15px">Họ tên<input name="sTen" type="text"/></p>
+
+                    <p style="margin-bottom: 15px">Điện thoại<input name="sDienthoai" type="tel"/></p>
+
+                    <p style="margin-bottom: 15px">Email<input name="sEmail" type="text"/></p>
+
+                    <p style="margin-bottom: 15px">Tin nhắn<input name="sMessage" type="text"/></p>
+
+                    <br/>
+
+                    <p bgcolor="bg932210" button="mediumi" class="submit" color="bgffffff" icon="inext-white" size="size20"><strong>GỬI YÊU CẦU</strong></p>
+                </div>
+            </div>
+
+            <div class="gridcol">
+                <h2 color="bg932210" font="Anton" size="size24">NUOCHOAMY.VN&nbsp;(VŨ TRỤ NƯỚC HOA)</h2>
+
+                <p>Nước hoa chính hãng xách tay Mỹ&nbsp;uy tín, chất lượng, mẫu mã cực kỳ đa dạng, cam kết giá rẻ nhất TP HCM</p>
+
+                <h2 font="Anton" size="size24">&nbsp;</h2>
+
+                <p>
+                    ☎ Hotline:&nbsp;<strong>028.730.10688</strong><br/>
+                    ★ Zalo: <strong>0978.357.900</strong><br/>
+                    ★ <strong><span style="color:#c0392b">142D/18 Cô Giang, Phường 2, Phú Nhuận, Tp.HCM</span></strong> ( Đi hết đường cô giang quẹo phải rồi quẹo trái là hẻm 142D)<br/>
+                    ★ FB:&nbsp;<a href="https://www.facebook.com/nuochoamychinhhanggiare/">https://www.facebook.com/nuochoamychinhhanggiare/</a><br/>
+                    ✉ nuochoamy.vn@gmail.com
+                </p>
+            </div>
+        </div>
+    </div>
+    <h2><iframe allowfullscreen="" frameborder="0" height="300" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d411.9529106739068!2d106.68464220783196!3d10.797624692520246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9e3cbe355386e545!2sUSA+UK+Shop!5e0!3m2!1sen!2sin!4v1503021581861" width="400"></iframe></h2>
+    <div class="clr10"></div>
+    <div class="fb-like" data-href="@Url.Action("Menu", "Home", new { id = "LienHe" })" data-width="800" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+    <div class="fb-comments" data-href="@Url.Action("Menu", "Home", new { id = "LienHe" })" data-numposts="5" width="100%" data-order-by="reverse_time"></div>
+    <div class="clr10"></div>
+</div>
+<style type="text/css">
+    .groupnews {
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+        border-bottom: 0.5px solid #ccc;
+        margin-bottom: 10px;
+    }
+
+    .groupnews:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .groupnews li {
+        background: none;
+        margin: 0;
+        padding: 0;
+        float: none;
+        margin-bottom: 30px;
+    }
+
+    .groupnews li:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .groupnews li a.img {
+        width: 25%;
+        height: 120px;
+        display: block;
+        float: left;
+        margin-right: 20px;
+        overflow: hidden;
+    }
+
+    .groupnews li a.img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    div.grid {
+        position: relative;
+        width: 100%;
+        outline: 1px dashed #ccc;
+        min-height: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    div.grid, div.grid .gridcol {
+        outline: none !important;
+    }
+
+    div.grid[value='col66'][space='space2x'] .gridcol {
+        width: 48% !important;
+        margin-bottom: 2%;
+    }
+
+    [border='dashed2px'] {
+        border: 2px dashed;
+    }
+
+    [padall='px20'] {
+        padding: 20px !important;
+    }
+
+    [bgcolor='bgfde3a7'] {
+        background-color: #fde3a7;
+    }
+
+    div.proform p {
+        margin-bottom: 6px;
+    }
+
+    div.proform p input[type='text'], div.proform p input[type='tel'] {
+        display: block;
+        width: 100%;
+        height: 28px;
+        line-height: 28px;
+        border: 0;
+        outline: 1px solid #ccc;
+        padding: 0;
+        padding-left: 5px;
+    }
+
+    [icon='inext-white'] {
+        background-image: url(../../wwwroot/images/icons/inext-white.png);
+    }
+
+    [icon] {
+        background-position: left 10px center;
+        background-repeat: no-repeat;
+    }
+
+    [color='bgffffff'] {
+        color: #ffffff;
+    }
+
+    [bgcolor='bg932210'] {
+        background-color: #932210;
+    }
+
+    [size='size20'] {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    [button='mediumi'] {
+        padding: 0 20px 0 40px;
+        height: 40px;
+        line-height: 40px !important;
+        background-size: 20px !important;
+    }
+
+    [button] {
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        transition: ease-in-out all 0.1s;
+    }
+</style>

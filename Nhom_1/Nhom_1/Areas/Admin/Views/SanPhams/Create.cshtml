@@ -1,0 +1,172 @@
+﻿@model IEnumerable<Nhom_1.Models.SanPham>
+
+@{
+    ViewBag.Title = "Sửa";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var danhMucs = ViewBag.TenDM;
+}
+
+<div class="right_col" role="main">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Tạo mới</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Danh mục</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Cài đặt 1</a>
+                                <a class="dropdown-item" href="#">Cài đặt 2</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-horizontal">
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype='multipart/form-data'>
+                            @Html.AntiForgeryToken()
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenSP">Tên sản phẩm<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="tenSP" required="required" class="form-control " name="tenSP">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenDM">Danh mục<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select name="tenDM" class="form-control">
+                                        <option value="0">Danh mục</option>
+                                        @{
+                                            foreach (string str in danhMucs)
+                                            {
+                                                <option value="@str">@str</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="thuongHieu">Thương hiệu<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="thuongHieu" required="required" class="form-control " name="thuongHieu">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="muiHuong">Mùi hương<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="muiHuong" required="required" class="form-control " name="muiHuong">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="mucDich">Mục đích<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="mucDich" required="required" class="form-control " name="mucDich">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="soLuong">Số lượng<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="soLuong" required="required" class="form-control " name="soLuong">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="nongDo">Nồng độ<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="nongDo" required="required" class="form-control " name="nongDo">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="dungTich">Dung tích<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="dungTich" required="required" class="form-control " name="dungTich">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="giaBan">Giá bán<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="giaBan" required="required" class="form-control " name="giaBan">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="moTa">Mô tả<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="moTa" required="required" class="form-control " name="moTa">
+                                </div>
+                            </div>
+                            <div class="imageupload">
+                                <div class="uploadimage">
+                                    <img id="outputImage" class="img-rounded" alt="Ảnh" width="200" height="200" src="~/wwwroot/images/icons/no-image-news.png" />
+                                    <p><label for="ufile" style="cursor: pointer">Chọn ảnh 1<span class="required">*</span></label></p>
+                                    <input name="anh" id="ufile" type="file" style="display: none" onchange="loadFile(event)" />
+                                </div>
+                                <div class="uploadimage">
+                                    <img id="outputImage1" class="img-rounded" alt="Ảnh" width="200" height="200" src="~/wwwroot/images/icons/no-image-news.png" />
+                                    <p><label for="ufile1" style="cursor: pointer">Chọn ảnh 2<span class="required">*</span></label></p>
+                                    <input name="anh1" id="ufile1" type="file" style="display: none" onchange="loadFile1(event)" />
+                                </div>
+                                <div class="uploadimage">
+                                    <img id="outputImage2" class="img-rounded" alt="Ảnh" width="200" height="200" src="~/wwwroot/images/icons/no-image-news.png" />
+                                    <p><label for="ufile2" style="cursor: pointer">Chọn ảnh 3<span class="required">*</span></label></p>
+                                    <input name="anh2" id="ufile2" type="file" style="display: none" onchange="loadFile2(event)" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="mybutton">
+                                <button style="margin-right: 50px" class="btn btn-success" type="submit">Lưu</button>
+                                <a href="@Url.Action("Index")" class="btn btn-primary">Trở về</a>
+                            </div>
+                        </form>
+                    </div>
+                    @if (ViewBag.Error != null)
+                    {
+                        <br />
+                        <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .uploadimage {
+        display: inline-block;
+        text-align: center;
+        margin: 0px 20px 0px 0px;
+    }
+
+    .imageupload {
+        text-align: center;
+    }
+
+    .mybutton {
+        text-align: center;
+    }
+</style>
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('outputImage');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    var loadFile1 = function (event) {
+        var image1 = document.getElementById('outputImage1');
+        image1.src = URL.createObjectURL(event.target.files[0]);
+    };
+    var loadFile2 = function (event) {
+        var image2 = document.getElementById('outputImage2');
+        image2.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>

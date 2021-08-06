@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<Nhom_1.Models.SanPham>
+
+@using PagedList.Mvc
+
+@if (Model.Count() > 0)
+{
+    <div class="main">
+        <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="@Url.Action("Index", "Home")"><span itemprop="name">Trang chủ</span></a> ❯ <meta itemprop="position" content="1" />
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="@Url.Action("Product_Category", "Home", new { id = Model.First().DanhMucSP.Ma_DM })">
+                    <span itemprop="name">@Model.First().DanhMucSP.Ten_DM</span>
+                </a>
+                <meta itemprop="position" content="2" />
+            </li>
+        </ol>
+        <div class="clr"></div>
+        <div class="titleheading">
+            <h2>@Model.First().DanhMucSP.Ten_DM</h2>
+            <em></em>
+            <p></p>
+        </div>
+        <div class="clr"></div>
+        <ul class="box">
+            @foreach (var item in Model)
+            {
+                <li class="product procart" style="text-align:center">
+                    <a href="@Url.Action("Product_Detail", "Home", new { id = item.Ma_SP })" title="@item.Ten_SP" class="img flex rotate">
+                        @{
+                            string ImagePath = "~/wwwroot/images/products/" + item.Anhs.Where(a => a.Ma_SP == item.Ma_SP).Select(b => b.DuongDanAnh).First();
+                        }
+                        <img src="@Url.Content(ImagePath)" data=@ImagePath alt="@item.Ten_SP" class="lazy" />
+                    </a>
+                    <a href="@Url.Action("Product_Detail", "Home", new { id = item.Ma_SP })" title="@item.Ten_SP"><h3>@item.Ten_SP</h3></a>
+                    @{
+                        string giaBan = Convert.ToDecimal(item.GiaBan_SP).ToString("###,###,###");
+                    }
+                    <span class="giaban">@giaBan VND</span>
+                    <div class="addtocard">
+                        <a href="@Url.Action("Product_To_Cart", "Home", new { id = item.Ma_SP })" style="color:white"><img src="~/wwwroot/images/icons/cart.png">Thêm vào giỏ</a>
+                    </div>
+                </li>
+            }
+        </ul>
+        <div class="page">
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Product_Category", new { Model.First().Ma_DM, page }))
+        </div>
+        <div class="clr10"></div>
+        <div class="chuky">
+            <span style="color:#2980b9"><strong>CÁC LƯU Ý KHI MUA HÀNG</strong></span>
+            <ul bullet="ullike">
+                <li>1. Địa chỉ mua hàng: <strong><span style="color:#c0392b">142D/18 Cô Giang, Phường 2, Phú Nhuận, Tp.HCM</span></strong> ( Đi hết đường cô giang quẹo phải rồi quẹo trái là hẻm 142D)</li>
+                <li>2. Vui lòng liên hệ: <span style="color:#c0392b"><strong>028.730.10688</strong></span>&nbsp;để được giải đáp và hỗ trợ tư vấn.</li>
+                <li>3. Vui lòng kiểm tra kỹ hóa đơn, số tiền thừa&nbsp;trước&nbsp;khi rời quầy thanh toán.</li>
+                <li>4. Mọi khiếu nại về thanh toán không được giải quyết sau khi rời quầy thanh toán.</li>
+                <li>5. Cam kết chính hãng 100% - Phát hiện <strong>hàng Fake 1 Đền 10</strong></li>
+                <li>6. Chính sách&nbsp;bảo hành chuyên nghiệp - <strong>1 ĐỔI 1 TRONG 2 THÁNG&nbsp;</strong></li>
+            </ul>
+        </div>
+        <div class="clr10"></div>
+    </div>
+}
+else
+{
+    <img src="~/wwwroot/images/icons/no_results_found.png" width="363" height="438" style="margin: 15px 185px">
+}
+<style>
+    .pagination > li {
+        display: inline-block;
+        padding-left: 0px;
+    }
+
+    .page {
+        float: right;
+    }
+</style>

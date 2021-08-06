@@ -1,0 +1,57 @@
+﻿@model List<int>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="row">
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
+                <div class="tile-stats">
+                    <div class="icon">
+                        <i class="fa fa-comments-o"></i>
+                    </div>
+                    <div class="count">@Model.First()</div>
+
+                    <h3><a href="@Url.Action("Index", "TaiKhoans")">Tài khoản</a></h3>
+                    <p></p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
+                <div class="tile-stats">
+                    <div class="icon">
+                        <i class="fa fa-caret-square-o-right"></i>
+                    </div>
+                    <div class="count">@Model.Skip(1).First()</div>
+
+                    <h3><a href="@Url.Action("Index", "DanhMucSPs")">Danh mục</a></h3>
+                    <p></p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
+                <div class="tile-stats">
+                    <div class="icon">
+                        <i class="fa fa-paperclip"></i>
+                    </div>
+                    <div class="count">@Model.Skip(2).First()</div>
+
+                    <h3><a href="@Url.Action("Index", "SanPhams")">Sản phẩm</a></h3>
+                    <p></p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
+                <div class="tile-stats">
+                    <div class="icon">
+                        <i class="fa fa-check-square-o"></i>
+                    </div>
+                    <div class="count">@Model.Last()</div>
+
+                    <h3><a href="@Url.Action("Index", "DonHangs")">Đơn hàng</a></h3>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,293 @@
+﻿@model IEnumerable<Nhom_1.Models.SanPham>
+
+@{
+    ViewBag.Title = "Tìm kiếm";
+    IEnumerable<string> danhMucs = Model.OrderBy(dm => dm.DanhMucSP.Ten_DM).Select(dm => dm.DanhMucSP.Ten_DM).Distinct();
+    IEnumerable<string> thuongHieus = Model.OrderBy(dm => dm.ThuongHieu_SP).Select(dm => dm.ThuongHieu_SP).Distinct();
+    IEnumerable<string> gias = Model.OrderBy(dm => dm.GiaBan_SP).Select(dm => dm.GiaBan_SP.ToString()).Distinct();
+    IEnumerable<string> mucDichs = Model.OrderBy(dm => dm.MucDich_SP).Select(dm => dm.MucDich_SP.ToString()).Distinct();
+    IEnumerable<string> nongDos = Model.OrderBy(dm => dm.NongDo_SP).Select(dm => dm.NongDo_SP).Distinct();
+    IEnumerable<string> muiHuongs = Model.OrderBy(dm => dm.MuiHuong_SP).Select(dm => dm.MuiHuong_SP).Distinct();
+}
+
+<div class="main">
+    <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Index", "Home")"><span itemprop="name" title="Trang chủ">Trang chủ</span></a> ❯ <meta itemprop="position" content="1">
+        </li>
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Search", "Home")" title="Tìm nước hoa theo nhu cầu"><span itemprop="name">Tìm nước hoa theo nhu cầu</span></a><meta itemprop="position" content="2">
+        </li>
+    </ol>
+    <div class="topsearch">
+        <div class="search">
+            <form action="Search" method="post">
+                <input type="search" placeholder="Từ khóa tìm kiếm" name="txtKey"/>
+                <div class="clr10"></div>
+                <select name="danhMuc">
+                    <option value="0">Danh mục</option>
+                    @{
+                        foreach (string str in danhMucs)
+                        {
+                            <option value="@str">@str</option>
+                        }
+                    }
+                </select>
+                <select name="thuongHieu">
+                    <option value="0">Thương hiệu</option>
+                    @{
+                        foreach (string str in thuongHieus)
+                        {
+                            <option value="@str">@str</option>
+                        }
+                    }
+                </select>
+                <select name="giaBan">
+                    <option value="0">Khoảng giá</option>
+                    @{
+                        for (int j = 2000000; j <= 20000000; j = j + 2000000)
+                        {
+                            <option value="@j">@j VND</option>
+                        }
+                    }
+                </select>
+                <select name="mucDich">
+                    <option value="0">Mục đích sử dụng</option>
+                    @{
+                        foreach (string str in mucDichs)
+                        {
+                            <option value="@str">@str</option>
+                        }
+                    }
+                </select>
+                <select name="nongDo">
+                    <option value="0">Nồng độ</option>
+                    @{
+                        foreach (string str in nongDos)
+                        {
+                            <option value="@str">@str</option>
+                        }
+                    }
+                </select>
+                <select name="muiHuong">
+                    <option value="0">Mùi hương</option>
+                    @{
+                        foreach (string str in muiHuongs)
+                        {
+                            <option value="@str">@str</option>
+                        }
+                    }
+                </select>
+                <button class="submit" type="submit"></button>
+                <div class="clr10"></div>
+            </form>
+        </div>
+    </div>
+    <style type="text/css">
+        .topsearch {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .topsearch .main {
+            background: rgba(255,255,255,0.95);
+            border-radius: 3px;
+        }
+
+        .topsearch a.logo {
+            display: block;
+            width: 25%;
+            float: left;
+        }
+
+        .topsearch a.logo img {
+            max-width: 100%;
+            max-height: 60px;
+        }
+
+        .topsearch .search {
+            width: 100%;
+        }
+
+        .topsearch .search {
+            height: 34px;
+            line-height: 34px;
+        }
+
+        .topsearch .search input {
+            height: 32px;
+            line-height: 32px;
+            width: 100%;
+            padding: 0 5px;
+            border: 0.5px solid #ccc;
+            background: #fff;
+            display: block;
+            float: left;
+            text-align: left;
+            border-radius: 0;
+        }
+
+        .topsearch .search select {
+            height: 32px;
+            line-height: 32px;
+            width: 16.66%;
+            padding: 0 2px;
+            border: 0.5px solid #ccc;
+            background: #fff;
+            display: block;
+            float: left;
+        }
+
+        .topsearch .search button.submit {
+            height: 32px;
+            line-height: 32px;
+            width: 10%;
+            padding: 0 10px;
+            display: block;
+            float: left;
+            border-radius: 0;
+            cursor: pointer;
+            background: #999 url(../../wwwroot/images/icons/search74.png) center center no-repeat;
+            background-size: 20px;
+            margin-top: 20px;
+        }
+
+        .topsearch .search button.submit:hover {
+            background-color: #7f8fa6;
+        }
+    </style>
+    <div class="content">
+        <div class="clr10"></div>
+        <p>
+            <strong>
+                <em>
+                    Với thanh công cụ đa năng, bạn có thể dễ dàng tìm kiếm loại nước hoa mà mình cần tìm theo <span style="color:#c0392b">Từ khóa tìm kiếm</span> hoặc theo&nbsp;<span style="color:#c0392b">danh mục, thương hiệu, khoảng giá, mục đích sử dụng, nồng độ nước hoa...</span><br/>
+                    <br/>
+                    Danh mục:&nbsp;
+                </em>
+            </strong>Nam, Nữ, Unisex, Mini - Vial, Tester, Set nước hoa<br/>
+            <em><strong>Thương Hiệu:</strong></em>&nbsp;<span style="color:#c0392b">Chanel, Dior, Hermes, Gucci, Creed, Calvin Klein,&nbsp;Bvlgari,&nbsp;Burberry,&nbsp;Dolce Gabbana,&nbsp;Versace,&nbsp;Tom Ford,&nbsp;Lacoste,&nbsp;Giorgio Armani,&nbsp;Narciso,&nbsp;Kilian,&nbsp;Lancôme,&nbsp;Maison Francis,&nbsp;Prada,&nbsp;Marc Jacobs,&nbsp;Carolina Herrera,&nbsp;Le labo,&nbsp;Scandel,&nbsp;Polo,&nbsp;Jean Paul Gaultier,......</span><br/>
+            <br/>
+            <em><strong>Khoảng Giá</strong></em> đa dang, giao động từ 500.000 VNĐ đến 5.000.000 VNĐ trở lên<br/>
+            <em><strong>Mục đích sử dụng:&nbsp;</strong></em>Đi chơi, Du lịch, Dạo phố, Mùa hè, Mùa đông, Sử dụng hằng ngày<br/>
+            <em><strong>Nồng Độ:</strong></em>&nbsp;EDP (Eau De Parfum), EDT (Eau De Toilette), EDC (Eau De Cologne), EF (Eau Fraiche)<br/>
+            &nbsp;
+        </p>
+        <div style="text-align:center"><img alt="Nước hoa xách tay chính hãng Mỹ uy tín giá rẻ tại TP.HCM" height="404" src="~/wwwroot/images/images/chon-nuoc-hoa-phu-hop-voi-tinh-cach.png" style="max-width:100%" width="800"/></div>
+        <h2>
+            <br/>
+            <span style="color:#c0392b"><span style="background-color:#f1c40f">Tiết lộ kinh nghiệm cách chọn nước hoa nam nữ phù hợp theo tính cách sở thích từng người</span></span>
+        </h2>
+        <br/>
+        Một chút hương thơm tạo nên cuốn hút, quyến rũ, nam tính trong các buổi hẹn hò hay tiệc tùng là việc mà bất kì cô nàng, chàng trai nào cũng muốn. Một chàng chỉn chu và thu hút hay một cô nàng gợi cảm, quyến rũ nếu thiếu đi hương vị nước hoa thì thật là đáng tiếc. Chính vì vậy, không ngoa khi nói rằng, nước hoa vốn dĩ là loại trang sức vô hình mà ai cũng cần sở hữu.<br/>
+        &nbsp;
+        <div style="text-align:center"><img alt="TÌM NƯỚC HOA HỢP VỚI BẠN" height="400" src="~/wwwroot/images/images/cach-chon-nuoc-hoa.jpg" style="max-width:100%" width="600"/></div>
+        <br/>
+        <br/>
+        Sử dụng nước hoa không chỉ giúp bạn tự tin hơn trước đám đông mà nước hoa còn giúp bạn thể hiện được phong cách, tính cách bản thân, thu hút mọi người gần gũi hơn. Mỗi người đều có tính cách, sở thích khác nhau nên nước hoa có rất nhiều loại nồng độ, mùi hương cho khách lựa chọn. Để có thể lựa chọn nước hoa cho nam nữ phù hợp với tích cách, sở thích cũng không phải là khó. Hãy cùng tham khảo nhé!<br/>
+        &nbsp;
+        <h3><span style="color:#2980b9">Dựa theo nồng độ nước hoa</span></h3>
+        <br/>
+        Nồng độ nước hoa&nbsp;chia thành 4 nhóm chính sau:&nbsp;<strong>Eau De Perfume (EDP),&nbsp;Eau de Toilette (EDT),&nbsp;Eau de Cologne (EDC) và&nbsp;Eau de Fraich</strong>.<br/>
+        <br/>
+        Tham khảo thêm:&nbsp;<u><a href=""><strong>Giải mã nước hoa EDP, EDT, EDC, EF là gì? Nên dùng loại nào tốt nhất?</strong></a></u>
+        <h3>
+            <br/>
+            <span style="color:#2980b9">Dựa theo nhóm hương</span>
+        </h3>
+        <br/>
+        <strong>• Hương hoa cỏ, trái cây: </strong>mang hương thơm của các loại hoa như hoa lan, hoa hồng, nhài, … kết hợp với các loại trái cây như nho, táo, mơ, kiwi, … mang lại cho bạn một cảm giác ngọt ngào, trẻ trung, nhẹ nhàng,…<br/>
+        &nbsp;
+        <div style="text-align:center"><img alt="TÌM NƯỚC HOA HỢP VỚI BẠN" height="364" src="~/wwwroot/images/images/chon-nuoc-hoa-cho-nu-phu-hop-voi-tinh-cach(1).jpg" style="max-width:100%" width="600"/></div>
+        <br/>
+        <br/>
+        <strong>• Hương Phương Đông:</strong> nhóm hương này khá đậm đà, nồng nàn, tông ấm, và có gì đó bí ẩn, huyền bí như chính Phương Đông. Dòng nước hoa này thường là hỗn hợp của các loại cây cỏ và gỗ quý phù hợp với phong cách lịch lãm, cuốn hút, bí ẩn<br/>
+        <br/>
+        <strong>• Hương gỗ:</strong> phần lớn nước hoa nam đều có tông gỗ, ấm áp, được chiết xuất chủ yếu từ các loại gỗ quý như tuyết tùng, đàn hương, …tạo ra sự lịch lãm và ấm áp. Dòng nước hoa này khá phù hợp với những anh chàng chững chạc và trưởng thành.<br/>
+        <br/>
+        <strong>• Hương liệu gia vị:</strong> dòng này chủ yếu được chiết xuất từ các loại thảo mộc như cây hồi, đinh hương, xạ hương, … thường dùng cho nước hoa nam<br/>
+        <br/>
+        <strong>• Floral Aldehydic:</strong> đây là hương thơm tổng hợp được chế biến hoàn toàn từ hương liệu nhân tạo, nó tạo ra mùi hương khá sắc sảo, quyến rũ, sang trọng<br/>
+        <br/>
+        <strong>• Chypre (Sip):</strong> dòng này lấy cảm hứng và mùi hương của đảo Síp ở vùng Địa Trung Hải, giữ mùi khá lâu<br/>
+        <br/>
+        <strong>• Nước:</strong> hoặc dòng Đại Dương, mang âm hưởng nhẹ tênh, trong vắt, dịu mát và sảng khoái như Đại Dương, những chai dòng này dùng cho mùa hè rất hợp.<br/>
+        <br/>
+        Khi tư vấn cho khách, bạn hãy quan tâm đến các vấn đề: yêu thích mùi hương nào, thường dùng môi trường nào nhiều, đi làm, đi chơi dạo phố hay đi tiệc, độ tuổi, … để có thể chọn cho khách chai phù hợp nhất.<br/>
+        &nbsp;
+        <div style="text-align:center"><img alt="TÌM NƯỚC HOA HỢP VỚI BẠN" height="401" src="~/wwwroot/images/images/bi-quyet-chon-nuoc-hoa(1).jpg" style="max-width:100%" width="600"/></div>
+        &nbsp;<br/>
+        Về dung tích thì có <strong>2 size phổ biến nhất là mini 5ml và size 100ml</strong>. Thông thường, với những người mới sử dụng nước hoa hoặc muốn trải nghiệm loại mới, mua dùng thử thì chọn dung tích <strong>5ml</strong>. Loại chai mini được thiết kế nhỏ gọn, tiện nghi mang đi làm, đi chơi. Nếu muốn tiện lợi hơn thì mua chai <strong>100ml</strong>. Ngoài ra còn có các size trung như <strong>30ml, 50ml</strong>.<br/>
+        &nbsp;
+        <h3><span style="color:#2980b9">Ngoài ra, nước hoa chính hãng thì sẽ có ba tầng hương: hương đầu, hương giữa và hương cuối</span></h3>
+        <br/>
+        <strong>• Nốt hương đầu (top notes, head notes):</strong> là mùi hương bạn nhận thấy ngay khi vừa xịt ra khỏi chai nước hoa, note hương này thường là mùi nhẹ, bay hơi nhanh sau tầm 5 -10 phút. Mặc dù mau bay nhưng tầng hương đầu này khá nịnh mũi và khá nhiều người quyết định mua ngay chỉ vì note hương này.<br/>
+        <br/>
+        <strong>• Nốt hương giữa (middle notes, heart notes):</strong> được xem như “trái tim” của chai nước hoa, note hương này tỏa ra sau khi lớp hương đầu bay đi, tạo ra mùi đặc trưng của chai nước hoa, và kéo dài khoảng 20 – 30 phút, thường khi mua nước hoa các bạn nên chờ mùi hương này xuất hiện để xem có phù hợp với mình hay không vì đây cũng là mùi hương chính của chai nước hoa.<br/>
+        <br/>
+        <strong>• Nốt hương cuối (base note):</strong> khi lớp hương giữa gần bay hết thì lớp hương cuối sẽ xuất hiện, hòa quyện với nhau tạo thành một mùi hương rất đặc sắc, lưu hương lâu và mạnh, đây chính là mùi hương chủ đạo của nước hoa.<br/>
+        &nbsp;
+        <div style="text-align:center"><img alt="TÌM NƯỚC HOA HỢP VỚI BẠN" height="315" src="~/wwwroot/images/images/kinh-nghiem-chon-nuoc-hoa-cho-nam(1).jpg" style="max-width:100%" width="600"/></div>
+        <br/>
+        Đặc biệt lưu ý rằng, tùy vào cơ địa của mỗi người, loại mồ hôi khác nhau cũng sẽ tạo ra một mùi hương khác biệt không ai giống ai, nên khi thử nước hoa bạn nên xịt lên cổ tay, rồi chờ cho tông giữa hoặc tông cuối xuất hiện để xem mình có hợp không nhé!<br/>
+        &nbsp;
+        <h3><span style="color:#2980b9">Dựa vào thương hiệu nước hoa</span></h3>
+        <br/>
+        Nếu bạn đang mong muốn tìm kiếm cho bản thân mình một lọ nước hoa nhưng chưa biết nên lựa chọn thương hiệu nào là thích hợp nhất. Dưới đây là các thương hiệu được người dùng đánh giá cao và ưa chuộng nhất.<br/>
+        <br/>
+        <strong>• Gucci: </strong>thường được nữ giới ưu ái bởi mùi hương sang trọng, tao nhã vừa hiện đại và thể hiện sự sang trọng và quý phái.<br/>
+        <br/>
+        <strong>•&nbsp;Bvlgari:</strong>&nbsp;Thương hiệu này đến từ nước Ý và luôn nhận được tình cảm cũng như sự yêu mến từ phái đẹp, bởi mùi hương khiến các nàng mê mẩn bởi cách sáng tạo mùi hương độc đáo,&nbsp;tinh khiết mùi hương thanh lịch, lãng mạn và quyến rũ. Sản phẩm hiện đại và trẻ trung sẽ giúp mọi người sớm tìm được loại nước hoa yêu thích và nhanh chóng hấp dẫn sự chú ý của đối phương mỗi khi bạn xuất hiện.<br/>
+        <br/>
+        <strong>• Chanel:</strong> Ngoài là thương hiệu về thời trang, phụ kiện, mỹ phẩm thì Chanel còn thành công ở lĩnh vực nước hoa. Thiết kế đẳng cấp và tinh xảo cũng được nhiều người biết đến và lựa chọn sử dụng.&nbsp;<br/>
+        &nbsp;
+        <div style="text-align:center"><img alt="TÌM NƯỚC HOA HỢP VỚI BẠN" height="450" src="~/wwwroot/images/images/nuoc-hoa-chanel-coco.jpg" style="max-width:100%" width="450"/></div>
+        <br/>
+        <strong>• Dior:</strong>&nbsp;có thiết kế dạng chai ấn tượng và độc đáo gồm 2 dòng dành cho nam và nữ.&nbsp;Chỉ cần sức vài giọt nước hoa lên cổ bạn sẽ trở thành tâm điểm nổi bật giữa đám đông. Đây chính là ưu điểm tuyệt vời của thương hiệu Dior mà ít hãng nước hoa nào có thể làm và sánh được.<br/>
+        &nbsp;<br/>
+        <strong>• Burberry:</strong> là&nbsp;nét cổ điển tinh tế giúp tạo nên sự quý phái, sang trọng. Mùi hương của nước hoa Burberry được tạo nên từ mùi của các loại quả khô, nhụy hoa và gỗ ấm nên rất nhẹ nhàng.<br/>
+        <br/>
+        <strong>• Calvin Klein:</strong> Mùi hương của nước hoa Calvin Klein vô cùng hấp dẫn,&nbsp;tạo cảm giác nhẹ nhàng thư giãn chắc chắn sẽ mang đến cho người dùng sự tự tin và quyến rũ nhất. Thương hiệu đã vô cùng thành công khi tạo ra mùi hương đặc trưng tạo cảm giác nhẹ nhàng thư giãn.<br/>
+        <br/>
+        <strong>• Hermes: </strong>Nước hoa Hermes là sự tượng trưng cho sự hoàn hảo, chất lượng và tinh tế trong từng mẫu thiết kế.&nbsp;<br/>
+        <br/>
+        Trên đây là những kiến thức cơ bản nhất mà bạn cần nắm khi mua nước hoa để biết nước hoa có phù hợp với tính cách, sở thích hay không. Nếu bạn cần mua chai nước hoa cho nam, nước hoa cho nữ theo sở thích, phong cách thì đừng ngần ngại liên hệ chúng tôi nhé!&nbsp;<br/>
+        <br/>
+        Vũ Trụ Nước Hoa chúng tôi tự hào là <em><strong>cửa hàng bán nước hoa cho nam nữ unisex mini tester sample chính hãng xách tay Mỹ cao cấp uy tín giá rẻ tại TP.HCM</strong></em>, tập hợp các thương hiệu nổi tiếng, khẳng định chất lượng chính hãng hàng đầu, giá cả cạnh tranh nhất thị trường, đảm bảo uy tín, với cam kết các giấy tờ chứng minh đầy đủ, bảo hành <strong>1 ĐỔI 1 trong 2 THÁNG</strong>, mang đến sự hài lòng tuyệt đối đến khách hàng.<br/>
+        &nbsp;
+        <div style="text-align:center"><img alt="Bật mí kinh nghiệm cách chọn nước hoa theo tính cách sở thích phù hợp" height="419" src="~/wwwroot/images/images/nuoc-hoa-nam-nu-chinh-hang-xach-tay(1).png" style="max-width:100%" width="800"/></div>
+        <br/>
+        XEM THÊM : <strong>Top 100+ các&nbsp;mẫu&nbsp;<a href="https://chosaigon24h.vn/gia-ban-nuoc-hoa-hang-hieu-nam-nu-chinh-hang-re-nhat-tai-hcm.html">nước hoa chính hãng xách tay mỹ cao cấp giá rẻ tphcm</a></strong><br/>
+        <strong>Bật mí 50+&nbsp;<a href="@Url.Action("Product_Category", "Home", new { id = 1 })">nước hoa cho nam giá rẻ tại tphcm</a>&nbsp;Hot nhất 2020</strong><br/>
+        <strong>Top 50+&nbsp;<a href="@Url.Action("Product_Category", "Home", new { id = 2 })">nước hoa cho nữ giá rẻ TP.HCM</a></strong><br/>
+        <br/>
+        <span style="font-size:22px"><strong>CHÚNG TÔI NHẬN ODER NƯỚC HOA XÁCH TAY CHÍNH HÃNG THEO YÊU CẦU KHÁCH HÀNG - CAM KẾT GIÁ RẺ NHẤT - GỌI NGAY <span style="color:#c0392b">028.730.10688</span></strong></span><br/>
+        &nbsp;
+        <blockquote>
+            <h3><span style="color:#27ae60"><strong>TẠI SAO NÊN LỰA CHỌN VŨ TRỤ NƯỚC HOA?</strong></span></h3>
+
+            <ul>
+                <li>Phát hiện hàng Fake Đền Gấp 10 lần</li>
+                <li>Thoải Mái Kiểm Tra Mã Vạch Sản Phẩm</li>
+                <li>Bảo hành 1 ĐỔI 1 TRONG 2 THÁNG</li>
+                <li>Cam Kết Các Giấy Tờ Chứng Minh</li>
+                <li>Cam Kết Chính Hãng 100%</li>
+                <li>Giá Cạnh Tranh Nhất Thị Trường</li>
+            </ul>
+        </blockquote>
+        &nbsp;
+        <h2 color="bg932210" font="Anton" size="size24">VŨ TRỤ NƯỚC HOA</h2>
+        <br/>
+        ☎ Hotline:&nbsp;<strong>0399851888</strong><br/>
+        ★ Zalo:&nbsp;<strong>0399851888</strong><br/>
+        ★&nbsp;<strong>142D/18 Cô Giang, Phường 2, Phú Nhuận, Tp.HCM</strong>&nbsp;( Đi hết đường cô giang quẹo phải rồi quẹo trái là hẻm 142D)<br/>
+        ★ <strong>Chi Nhánh&nbsp;1</strong>: <strong>297 Trần Hưng Đạo, P.Cô Giang, quận 1,&nbsp;Tp.HCM ( Bạch Long Mobile)</strong><br/>
+        ★ <strong>Chi Nhánh 2</strong>: <strong>144 Trần Quang Khải,&nbsp;P.Tân Định, quận 1,&nbsp;Tp.HCM ( Bạch Long Mobile)</strong><br/>
+        ★ <strong>Chi Nhánh 3</strong>: <strong>307 đường 3/2,&nbsp;P.10, quận 10,&nbsp;Tp.HCM ( Bạch Long Mobile)</strong><br/>
+        ★ FB:&nbsp;<a href="https://www.facebook.com/nuochoamychinhhanggiare/">https://www.facebook.com/nuochoamychinhhanggiare/</a><br/>
+        ✉ nuochoamy.vn@gmail.com<br/>
+        &nbsp;
+        <h2><iframe allowfullscreen="" frameborder="0" height="300" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d411.9529106739068!2d106.68464220783196!3d10.797624692520246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9e3cbe355386e545!2sUSA+UK+Shop!5e0!3m2!1sen!2sin!4v1503021581861" width="400"></iframe></h2>
+        <div class="clr10"></div>
+    </div>
+</div>

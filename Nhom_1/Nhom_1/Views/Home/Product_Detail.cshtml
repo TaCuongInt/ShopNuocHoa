@@ -1,0 +1,287 @@
+﻿@model Nhom_1.Models.SanPham
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+}
+
+<div class="main">
+    <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Index", "Home")"><span itemprop="name">Trang chủ</span></a> ❯ <meta itemprop="position" content="1" />
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Product_Category", "Home", new { id = Model.Ma_DM })"><span itemprop="name">@Model.DanhMucSP.Ten_DM</span></a> ❯ <meta itemprop="position" content="2" />
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Product_Detail", "Home", new { id = Model.Ma_SP })"><span itemprop="name">@Model.Ten_SP</span></a><meta itemprop="position" content="3" />
+        </li>
+    </ol>
+    <div class="clr10"></div>
+    <div class="titleheading">
+        <h2>@Model.Ten_SP</h2>
+    </div>
+    <div class="cgallery">
+        <div class="product-container">
+            <div class="swiper-wrapper">
+                @foreach (var item in Model.Anhs)
+                {
+                    <div class="swiper-slide">
+                        @{
+                            string Image_Path = "~/wwwroot/images/products/" + item.DuongDanAnh;
+                        }
+                        <img src="@Url.Content(Image_Path)" data="@Image_Path" alt="@item.DuongDanAnh" load="lazy" />
+                    </div>
+                }
+            </div>
+            <br>
+            <div style="text-align:center">
+                @foreach (var item in Model.Anhs)
+                {
+                    <span class="dot"></span>
+                }
+            </div>
+            <div class="swiper-product-pagination"></div>
+        </div>
+    </div>
+    <div class="cinfo procart">
+        <p class="category"><span>Mã sản phẩm</span>: <strong>@Model.Ma_SP</strong></p>
+        <p class="category"><span>Phân loại</span>: @Model.DanhMucSP.Ten_DM</p>
+        <p class="category"><span>Thương hiệu</span>: @Model.ThuongHieu_SP</p>
+        <p class="category"><span>Nhóm hương</span>: @Model.MuiHuong_SP</p>
+        @if (Model.SoLuong_SP > 0)
+        {
+            <p class="category"><span>Tình trạng</span>: Còn hàng</p>
+        }
+        else
+        {
+            <p class="category"><span>Tình trạng</span>: Hết hàng</p>
+        }
+        <p class="category"><span>Nồng độ</span>: @Model.NongDo_SP</p>
+        <ul class="listprice">
+            <li giaban="@Model.GiaBan_SP" name="@Model.DungTich_SP ML">
+                <span class="name">@Model.DungTich_SP ML<em>Giao hàng ngay</em></span>
+                <p>
+                    <input type="number" min="0" value="1" />
+                    @{
+                        string giaban = Convert.ToDecimal(Model.GiaBan_SP).ToString("###,###,###");
+                    }
+                    <span class="giaban">@giaban VND</span>
+                </p>
+            </li>
+        </ul>
+        <div class="addtocart" id="@Model.Ma_SP" listcart="" reload="1">
+            <a href="@Url.Action("Product_To_Cart", "Home", new { id = Model.Ma_SP })" style="color:white"><img src="~/wwwroot/images/icons/cart.png"> Thêm vào giỏ</a>
+        </div>
+        <div class="addtocart" id="@Model.Ma_SP" listcart="" reload="0">
+            <a href="@Url.Action("Product_To_Cart", "Home", new { id = Model.Ma_SP })" style="color:white">Mua ngay</a>
+        </div>
+        <p><img src="~/wwwroot/images/icons/iconnuochoa2.png" alt="Phương thức thanh toán" /></p>
+        <div class="camket">
+            <ul>
+                <li>
+                    <img alt="Nước hoa xách tay chính hãng Mỹ uy tín giá rẻ tại TP.HCM" data="~/wwwroot/images/icons/c2ad1b76e75c1a02434d-1-15923833237.jpg" height="53" src="~/wwwroot/images/icons/c2ad1b76e75c1a02434d-1-15923833237.jpg" width="50" />
+                    <p>&nbsp;Cam kết chính hãng 100% - Phát Hiện hàng Fake 1 Đền 10<br />&nbsp;</p>
+                </li>
+                <li style="text-align: justify">
+                    <img alt="Nước hoa xách tay chính hãng Mỹ uy tín giá rẻ tại TP.HCM" data="~/wwwroot/images/icons/32e30439f813054d5c02-15923833522.jpg" height="47" src="~/wwwroot/images/icons/32e30439f813054d5c02-15923833522.png" width="50" />
+                    <p style="text-align: left">
+                        &nbsp;Giao hàng nhanh chóng tận nơi trên toàn quốc<br />
+                        <br />
+                        &nbsp;
+                    </p>
+                </li>
+                <li>
+                    <img alt="Nước hoa xách tay chính hãng Mỹ uy tín giá rẻ tại TP.HCM" data="~/wwwroot/images/icons/4aff4025bc0f4151181e-2-159238338162.jpg" height="53" src="~/wwwroot/images/icons/4aff4025bc0f4151181e-2-159238338162.png" width="50" />
+                    <p>
+                        &nbsp;Bảo hành 1 ĐỔI 1 TRONG 2 THÁNG - Đổi/Trả 3 NGÀY<br />
+                        &nbsp;
+                    </p>
+                </li>
+                <li style="text-align: justify">
+                    <img alt="Nước hoa xách tay chính hãng Mỹ uy tín giá rẻ tại TP.HCM" data="~/wwwroot/images/icons/387877a38b8976d72f98-2-159238341836.jpg" height="53" src="~/wwwroot/images/icons/387877a38b8976d72f98-2-159238341836.png" width="50" />
+                    <p style="text-align: left">&nbsp;Hỗ trợ tư vấn chuyên nghiệp hotline:&nbsp;<span style="color:#c0392b"><strong>028.730.10688</strong></span></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="clr10"></div>@Model.MoTa_SP<div class="clr10"></div>
+    <div class="clr10"></div>
+    <div class="chuky">
+        <span style="color:#2980b9"><strong>CÁC LƯU Ý KHI MUA HÀNG</strong></span>
+        <ul bullet="ullike">
+            <li>1. Địa chỉ mua hàng: <strong><span style="color:#c0392b">142D/18 Cô Giang, Phường 2, Phú Nhuận, Tp.HCM</span></strong> ( Đi hết đường cô giang quẹo phải rồi quẹo trái là hẻm 142D)</li>
+            <li>2. Vui lòng liên hệ: <span style="color:#c0392b"><strong>028.730.10688</strong></span>&nbsp;để được giải đáp và hỗ trợ tư vấn.</li>
+            <li>3. Vui lòng kiểm tra kỹ hóa đơn, số tiền thừa&nbsp;trước&nbsp;khi rời quầy thanh toán.</li>
+            <li>4. Mọi khiếu nại về thanh toán không được giải quyết sau khi rời quầy thanh toán.</li>
+            <li>5. Cam kết chính hãng 100% - Phát hiện <strong>hàng Fake 1 Đền 10</strong></li>
+            <li>6. Chính sách&nbsp;bảo hành chuyên nghiệp - <strong>1 ĐỔI 1 TRONG 2 THÁNG&nbsp;</strong></li>
+        </ul>
+        <br />
+    </div>
+</div>
+<div class="clr10"></div>
+<style type="text/css">
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Verdana, sans-serif;
+    }
+
+    .swiper-slide {
+        display: none;
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+    .swiper-wrapper {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+    }
+
+    .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .active {
+        background-color: #717171;
+    }
+
+    .product-container {
+        position: relative;
+        overflow: hidden
+    }
+
+    .product-container .swiper-product-pagination {
+        position: absolute;
+        bottom: 20px;
+        text-align: center;
+        z-index: 99
+    }
+
+    .product-container .swiper-pagination-bullet {
+        margin: 0 8px !important
+    }
+
+    .product-container .swiper-pagination-bullet.swiper-pagination-bullet-active {
+        background: #000038;
+        border: 2px solid #fceb96;
+        width: 16px;
+        height: 16px;
+        transform: translate3d(0px, 3px, 0);
+        -webkit-transform: translate3d(0px, 3px, 0);
+    }
+
+    .product-container .swiper-slide img {
+        width: 100%;
+        height: 650px;
+    }
+
+    .listprice span.giaban {
+        display: inline-block;
+    }
+
+    .cgallery {
+        width: 55%;
+        float: left;
+        position: relative
+    }
+
+    .cinfo {
+        width: 43%;
+        float: right;
+        position: relative
+    }
+
+    .titleheading {
+        margin-bottom: 20px
+    }
+
+    .category span {
+        display: inline-block;
+        width: 100px;
+        margin-bottom: 5px;
+    }
+
+    .listprice {
+        line-height: 20px;
+        padding: 0;
+        margin: 20px 0;
+        max-height: 360px;
+        overflow-y: auto
+    }
+
+    .listprice li {
+        border-bottom: 0.5px solid #ccc;
+        margin: 0;
+        padding: 0;
+        background: none;
+        margin-bottom: 10px;
+        padding-bottom: 10px
+    }
+
+    .listprice li:last-child {
+        border-bottom: none
+    }
+
+    .listprice li input {
+        display: inline-block;
+        width: 60px;
+        height: 32px;
+        line-height: 32px;
+        border: 0.5px solid #ccc;
+        border-left: 2px solid #999;
+        margin-right: 5px;
+        padding-left: 10px
+    }
+
+    .listprice span.name {
+        display: inline-block;
+        text-align: right
+    }
+
+    .listprice span.name em {
+        display: block;
+        font-size: 10px;
+        color: #666;
+    }
+
+    .listprice span.giaban {
+        font-weight: bold;
+        font-size: 18px
+    }
+
+    .giaban {
+        margin-left: 120px;
+    }
+</style>
+<script type="text/javascript">
+    var slideIndex = 0;
+    showSlides();
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("swiper-slide");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 3000);
+    }
+</script>

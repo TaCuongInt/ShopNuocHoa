@@ -1,0 +1,25 @@
+﻿<div class="linemenu">
+    <div class="main">
+        <a class="logohome" href="@Url.Action("Index", "Home")"><img src="~/wwwroot/images/icons/logo.png" alt="Trang chủ"></a>
+        <div class="khungmn">
+            <a href="@Url.Action("Index", "Home")" title="Trang chủ" class="home">Trang chủ</a>
+            <a href="@Url.Action("Menu", "Home", new { id = "GioiThieu" })" title="Giới thiệu">Giới thiệu</a>
+            <a href="@Url.Action("Search", "Home")" title="Tìm nước hoa hợp với bạn">Tìm nước hoa hợp với bạn</a>
+            <a href="@Url.Action("Menu", "Home", new { id = "BaoHanh"})" title="Chính sách bảo hành">Chính sách bảo hành</a>
+            <a href="@Url.Action("Menu", "Home", new { id = "TinTuc" })" title="Tin tức">Tin tức</a>
+            <a href="@Url.Action("Menu", "Home", new { id = "LienHe" })" title="Liên hệ">Liên hệ</a>
+        </div>
+    </div>
+    <div class="account">
+        @if (Session["tenTK"] != null)
+        {
+            <a id="register" href="@Url.Action("Account", "Home")"><img src="~/wwwroot/images/icons/account.png" alt="Tài khoản" style="max-width:22px"/><span>@Session["tenTK"]</span></a>
+            <a id="login" href="@Url.Action("Logout", "Home")"><img src="~/wwwroot/images/icons/logout_icon_151219.png" alt="Đăng xuất" style="max-width:24px"/><span>Đăng xuất</span></a>
+        }
+        else
+        {
+            <a id="register" href="@Url.Action("Register", "Home")"><img src="~/wwwroot/images/icons/register.png" alt="Đăng ký" style="max-width:22px"/><span>Đăng ký</span></a>
+            <a id="login" href="@Url.Action("Login", "Home")"><img src="~/wwwroot/images/icons/account.png" alt="Đăng nhập"/><span>Đăng nhập</span></a>
+        }
+    </div>
+</div>

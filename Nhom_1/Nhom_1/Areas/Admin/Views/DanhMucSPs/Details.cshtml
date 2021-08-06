@@ -1,0 +1,75 @@
+﻿@model Nhom_1.Models.DanhMucSP
+
+@{
+    ViewBag.Title = "Chi tiết";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var IconPath = "~/wwwroot/images/icons/" + Model.Icon;
+    var ImagePath = "~/wwwroot/images/images/" + Model.Anh;
+}
+
+<div class="right_col" role="main">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Chi tiết</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>@Model.Ten_DM</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="">Cài đặt 1</a>
+                                <a class="dropdown-item" href="">Cài đặt 2</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-horizontal">
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="maDM">Mã danh mục<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="maDM" required="required" class="form-control " name="maDM" value="@Model.Ma_DM" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenDM">Tên danh mục<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="tenDM" required="required" class="form-control " name="tenDM" value="@Model.Ten_DM" readonly>
+                            </div>
+                        </div>
+                        <div class="uploadimage">
+                            <img id="outputIcon" class="img-rounded" alt="Icon" width="200" height="200" src="@Url.Content(@IconPath)"/>
+                            <p><label for="ufile" style="cursor: pointer">Icon<span class="required">*</span></label></p>
+                        </div>
+                        <div class="uploadimage">
+                            <img id="outputImage" class="img-rounded" alt="Ảnh" width="200" height="330" src="@Url.Content(@ImagePath)"/>
+                            <p><label for="ufile1" style="cursor: pointer">Ảnh<span class="required">*</span></label></p>
+                        </div>
+                        <br/>
+                        <a href="@Url.Action("Index")" style="margin-left: 520px" class="btn btn-primary">Trở về</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .uploadimage {
+        display: inline-block;
+        text-align: center;
+        margin: 0px -200px 0px 320px;
+    }
+</style>

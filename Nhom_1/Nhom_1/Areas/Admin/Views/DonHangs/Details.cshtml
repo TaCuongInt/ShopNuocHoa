@@ -1,0 +1,202 @@
+﻿@model PagedList.IPagedList<Nhom_1.Models.ChiTietDH>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="right_col" role="main">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Chi tiết đơn hàng</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Thông tin người đặt</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="">Cài đặt 1</a>
+                                <a class="dropdown-item" href="">Cài đặt 2</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="form-horizontal">
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="tenTK">Tên tài khoản<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="tenTK" required="required" class="form-control " name="tenTK" value="@Model.FirstOrDefault().DonHang.TaiKhoan.Ten_TK" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nguoiDat">Người đặt<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="nguoiDat" required="required" class="form-control " name="nguoiDat" value="@Model.FirstOrDefault().DonHang.HoTen_DH" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="dienThoai">Điện thoại<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="dienThoai" required="required" class="form-control " name="dienThoai" value="@Model.FirstOrDefault().DonHang.DienThoai_DH" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="email" required="required" class="form-control " name="email" value="@Model.FirstOrDefault().DonHang.Email_DH" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="diaChi">Địa chỉ<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="diaChi" required="required" class="form-control " name="diaChi" value="@Model.FirstOrDefault().DonHang.DiaChi_DH" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="ghiChu">Ghi chú<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="ghiChu" required="required" class="form-control " name="ghiChu" value="@Model.FirstOrDefault().DonHang.GhiChu_DH
+                                       " readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="ngayDat">Ngày đặt<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="ngayDat" required="required" class="form-control " name="ngayDat" value="@Model.FirstOrDefault().DonHang.NgayDat_DH" readonly>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="trangThai">Trạng thái<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @if (Model.FirstOrDefault().DonHang.TrangThai_DH == 1)
+                                {
+                                    <input type="text" id="trangThai" required="required" class="form-control " name="trangThai" value="Đã thanh toán" readonly>
+                                }
+                                else
+                                {
+                                    <input type="text" id="trangThai" required="required" class="form-control " name="trangThai" value="Chưa thanh toán" readonly>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Các sản phẩm trong đơn</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="">Cài đặt 1</a>
+                                <a class="dropdown-item" href="">Cài đặt 2</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="">
+                            <div class="" id="datatable-responsive_length" style="display: flex; margin-left: 10px">
+                                <p style="margin: 10px 10px 0px 0px">Hiển thị</p>
+                                <p>
+                                    <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                        <option value="50">50</option>
+                                    </select>
+                                </p>
+                                <p style="margin: 10px 0px 0px 10px">bản ghi</p>
+                            </div>
+                        </div>
+                        <div class="" style="float:right">
+                            @using (Html.BeginForm())
+                            {
+                                <div id="datatable-responsive_filter" class="" style="display: flex; margin-left: 750px">
+                                    <p style="margin: 10px 10px 0px 0px">Search:</p>
+                                    <label>
+                                        <input type="search" class="form-control input-sm" aria-controls="datatable-responsive" name="searchString">
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-box table-responsive">
+                                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            @{
+                                                int maDH = Model.FirstOrDefault().Ma_DH;
+                                            }
+                                            <th>
+                                                @Html.ActionLink("Mã bản ghi", "Details", new { id = maDH, sortOrder = ViewBag.SapTheoMaBanGhi, curentFilter = ViewBag.CurentFilter })
+                                            </th>
+                                            <th>
+                                                @Html.ActionLink("Mã đơn hàng", "Details", new { id = maDH, sortOrder = ViewBag.SapTheoMaDH, curentFilter = ViewBag.CurentFilter })
+                                            </th>
+                                            <th>
+                                                @Html.ActionLink("Tên sản phẩm", "Details", new { id = maDH, sortOrder = ViewBag.SapTheoTenSP, curentFilter = ViewBag.CurentFilter })
+                                            </th>
+                                            <th>
+                                                @Html.ActionLink("Số lượng", "Details", new { id = maDH, sortOrder = ViewBag.SapTheoSoLuong, curentFilter = ViewBag.CurentFilter })
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Ma_CT</td>
+                                                <td>@item.Ma_DH</td>
+                                                <td>@item.SanPham.Ten_SP</td>
+                                                <td>@item.SoLuong_CT</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurentSort, curentFilter = ViewBag.CurentFilter }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    table {
+        text-align: center;
+    }
+</style>

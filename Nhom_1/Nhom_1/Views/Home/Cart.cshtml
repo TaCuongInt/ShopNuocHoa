@@ -1,0 +1,318 @@
+﻿@model IEnumerable<Nhom_1.Models.GioHang>
+
+@{
+    ViewBag.Title = "Giỏ hàng";
+}
+
+<div class="main">
+    <ol itemscope="" itemtype="http://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Index", "Home")"><span itemprop="name" title="Trang chủ">Trang chủ</span></a> ❯ <meta itemprop="position" content="1">
+        </li>
+        <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Cart", "Home")" title="Giỏ hàng"><span itemprop="name">Giỏ hàng</span></a><meta itemprop="position" content="2">
+        </li>
+    </ol>
+    <div class="listcart">
+        @if (Model.Count() > 0)
+        {
+            int tongTien = 0;
+            foreach (var item in Model)
+            {
+                <form action="Edit_Cart/@item.Ma_GH" method="post" style="text-align:center">
+                    <div class="item">
+                        <ul>
+                            <div class="oneline">
+                                <li class="hinhanh">
+                                    <a href="@Url.Action("Product_Detail", "Home", new { id = item.Ma_SP })" title="@item.SanPham.Ten_SP" target="_blank">
+                                        @{
+                                            string ImagePath = "~/wwwroot/images/products/" + item.SanPham.Anhs.Where(h => h.Ma_SP.Equals(item.Ma_SP)).Select(a => a.DuongDanAnh).First();
+                                        }
+                                        <img src="@Url.Content(ImagePath)" alt="@item.SanPham.Ten_SP" style="margin-left:-20px" />
+                                    </a>
+                                </li>
+                                <li class="ten">@item.SanPham.Ten_SP</li>
+                            </div>
+                            @{
+                                string giaban = Convert.ToDecimal(item.SanPham.GiaBan_SP).ToString("###,###,###");
+                            }
+                            <li class="giaban">@giaban</li>
+                            <li>*</li>
+                            <li class="soluong">
+                                <input type="number" name="soLuong" value="@item.SoLuong_GH" min="0" style="text-align:center" />
+                            </li>
+                            <li>=</li>
+                            @{
+
+                                string thanhtien = Convert.ToDecimal(Convert.ToInt32(item.SanPham.GiaBan_SP) * Convert.ToInt32(item.SoLuong_GH)).ToString("###,###,###");
+                                tongTien += Convert.ToInt32(item.SanPham.GiaBan_SP) * Convert.ToInt32(item.SoLuong_GH);
+                            }
+                            <li class="thanhtien">
+                                <span>@thanhtien</span>
+                            </li>
+                            <li class="delete"><a href="@Url.Action("Delete_Cart", "Home", new { id = item.Ma_GH })">&nbsp;</a></li>
+                        </ul>
+                    </div>
+                </form>
+            }
+            <div class="item total ">
+                <ul style="line-height:40px">
+                    <div class="oneline" style="line-height:28px">
+                        <li class="hinhanh" style="font-size:20px; line-height:33px; margin-left: 16px">Tổng</li>
+                        <li class="delete"><a href="@Url.Action("Delete_Cart", "Home", new { id = 0 })" style="margin-left: 26px">&nbsp;</a></li>
+                    </div>
+                    @{
+                       string tongTien1 = Convert.ToDecimal(tongTien).ToString("###,###,###");
+                    }
+                    <li class="thanhtien" style="float:right; margin-right: 30px" id="tongtien">@tongTien1</li>
+                </ul>
+                <ul>
+                    <li>
+                        @if (ViewBag.Error != null)
+                        {
+                            <br />
+                            <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+                        }
+                    </li>
+                </ul>
+            </div>
+            <div class="infocart ">
+                <div class="form" style="width:50%; float:left">
+                    <form action="Order" method="post">
+                        <h3>THÔNG TIN GIAO HÀNG</h3>
+                        <p><span>Số điện thoại</span><input type="text" name="dienThoai" value="@Session["dienThoai"]" /></p>
+                        <p><span>Họ tên</span><input type="text" name="hoTen" value="@Session["hoTen"]" /></p>
+                        <p><span>Email</span><input type="text" name="email" value="@Session["email"]" /></p>
+                        <p><span>Địa chỉ nhận hàng (Ghi rõ số nhà, tên đường)</span><input type="text" name="diaChi" value="@Session["diaChi"]" /></p>
+                        <p><span>Ghi chú cho đơn hàng</span><input type="text" name="ghiChu" /></p>
+                        <input type="submit" class="submit" value="ĐẶT HÀNG" />
+                    </form>
+                </div>
+                <div class="thanhtoanimg"><img src="~/wwwroot/images/images/thanhtoan.jpg" alt="Phương thức thanh toán" style="float:right; margin-right:-15px; max-width:50%" /></div>
+            </div>
+        }
+        else
+        {
+            <p>Chưa có sản phẩm trong giỏ hàng <a href="@Url.Action("Index", "Home")">[Quay trở lại trang chủ]</a></p>
+            <img src="~/wwwroot/images/icons/nocart.jpg" alt="Không có sản phẩm trong giỏ hàng" width="300" height="300" />
+        }
+    </div>
+    <div class="note">
+        <h2 color="bg932210" font="Anton" size="size24"><span style="color:#000000">NUOCHOAMY.VN (VŨ TRỤ NƯỚC HOA)</span></h2>
+        <p>
+            ☎ Hotline:&nbsp;<strong>028.730.10688 -&nbsp;0901.961.077 (Mua Sỉ)</strong><br/>
+            ★ Zalo:<strong>0978.357.900</strong><br/>
+            ★ <strong>142D/18 Cô Giang, Phường 2, Phú Nhuận, Tp.HCM</strong> ( Đi hết đường cô Giang quẹo phải rồi quẹo trái là hẻm 142D)<br/>
+            ★ <strong>Chi Nhánh&nbsp;1</strong>:<strong>297 Trần Hưng Đạo, P.Cô Giang, quận 1,&nbsp;Tp.HCM ( Bạch Long Mobile)</strong><br/>
+            ★ <strong>Chi Nhánh 2</strong>:<strong>144 Trần Quang Khải,&nbsp;P.Tân Định, quận 1,&nbsp;Tp.HCM ( VIENDONG Mobile)</strong><br/>
+            ★ <strong>Chi Nhánh 3</strong>:<strong>307 đường 3/2,&nbsp;P.10, quận 10,&nbsp;Tp.HCM ( VIENDONG&nbsp;Mobile)</strong><br/>
+            ✉ nuochoamy.vn@gmail.com
+        </p>
+        <br/>
+    </div>
+</div>
+<style type="text/css">
+    .delete {
+        width: 5%;
+        background: url(../../wwwroot/images/icons/delete-cross.png) top 6px center no-repeat;
+        background-size: 12px;
+        cursor: pointer;
+    }
+
+    .listcart .item {
+        border-bottom: 0.5px solid #ccc;
+        padding: 5px 0;
+        width: 100%;
+        font-size: 13px
+    }
+
+    .listcart .item:after {
+        content: '';
+        display: block;
+        clear: both
+    }
+
+    .listcart .item ul {
+        padding: 0;
+        margin: 5px 0px 0px 20px;
+    }
+
+    .listcart .item ul li {
+        float: left;
+        margin: 0;
+        padding: 0;
+        background: none;
+    }
+
+    .listcart .item ul li.hinhanh {
+        width: 10%
+    }
+
+    .listcart .item ul li.ten {
+        width: 50%;
+    }
+
+    .listcart .item ul li.giaban {
+        width: 10%;
+        font-size: 13px;
+        color: #000
+    }
+
+    .listcart .item ul li.giacty {
+        width: 10%
+    }
+
+    .listcart .item ul li.soluong {
+        width: 10%
+    }
+
+    .listcart .item ul li.soluong input {
+        height: 32px;
+        line-height: 32px;
+        width: 60px;
+        border: 0.5px solid #ccc;
+        border-radius: 3px;
+        padding-left: 5px
+    }
+
+    .listcart .item ul li.thanhtien {
+        width: 10%;
+        font-weight: bold
+    }
+
+    .listcart .item ul li.thanhtien p {
+        font-size: 12px;
+        color: #666;
+    }
+
+    .listcart .item ul li.delete {
+        float: right;
+        width: 5%;
+        background: url(../../wwwroot/images/icons/delete-cross.png) top 6px center no-repeat;
+        background-size: 12px;
+        cursor: pointer
+    }
+
+    .listcart .item ul li.delete.none {
+        background: none
+    }
+
+    .listcart .item ul li.hinhanh a {
+        display: block;
+        width: 100%;
+        max-width: 100px;
+        height: 50px;
+    }
+
+    .listcart .item ul li.hinhanh a img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover
+    }
+
+    .listcart .item.total {
+        background: #eee
+    }
+
+    .listcart .item.total ul li.thanhtien {
+        color: #f30;
+        font-size: 18px
+    }
+
+    .listcart .item.total ul li.giacty {
+        text-decoration: none
+    }
+
+    .infocart {
+        margin-top: 30px;
+        margin-bottom: 30px
+    }
+
+    .infocart:after {
+        content: '';
+        display: block;
+        clear: both
+    }
+
+    .infocart .form {
+        width: 40%;
+        float: left
+    }
+
+    .infocart .note {
+        width: 55%;
+        float: right
+    }
+
+    .infocart .form p {
+        margin-bottom: 10px
+    }
+
+    .infocart .form p span {
+        display: block;
+        font-size: 12px;
+        line-height: 18px;
+        color: #999
+    }
+
+    .infocart .form p input {
+        display: block;
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        padding-left: 5px;
+        border: 0.5px solid #ccc
+    }
+
+    .infocart .form p select {
+        width: 100%
+    }
+
+    .infocart .form .submit {
+        width: 50%;
+        float: left;
+        text-align: center;
+        height: 36px;
+        line-height: 36px;
+        font-size: 18px;
+        background: #333;
+        color: #fff;
+        cursor: pointer
+    }
+
+    .infocart .form .submit[click='1'] {
+        background-color: #999
+    }
+
+    .infocart .form .payment {
+        width: 50%;
+        float: right;
+        text-align: center;
+        height: 36px;
+        line-height: 36px;
+        font-size: 18px;
+        background: #44bd32;
+        color: #fff;
+        cursor: pointer
+    }
+
+    .infocart .form .payment[click='1'] {
+        background-color: #999
+    }
+
+    .select2-results ul {
+        margin: 0;
+        padding: 0
+    }
+
+    .select2-results ul li {
+        margin: 0;
+        padding: 0 5px;
+        background: none
+    }
+
+    .infocart .form p em.resettinhthanh {
+        color: #2980b9;
+        cursor: pointer
+    }
+</style>

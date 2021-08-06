@@ -1,0 +1,144 @@
+﻿@model Nhom_1.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Đăng ký";
+}
+
+<div class="main">
+    <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Index", "Home")"><span itemprop="name">Trang chủ</span></a> ❯ <meta itemprop="position" content="1" />
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="@Url.Action("Register", "Home")"><span itemprop="name">Đăng ký</span></a><meta itemprop="position" content="2" />
+        </li>
+    </ol>
+    <form action="Register" method="post">
+        @Html.AntiForgeryToken()
+        <div class="container">
+            <h1>Đăng ký</h1>
+            <p>Nhập thông tin tài khoản</p>
+            <hr>
+            <div style="display: flex">
+                <div style="float: left; width: 600px">
+                    <label for="tenTK"><b>Tên tài khoản</b></label>
+                    <input type="text" placeholder="Nhập tên tài khoản" name="tenTK" required>
+
+                    <label for="matKhauTK"><b>Mật khẩu</b></label>
+                    <input type="password" placeholder="Nhập mật khẩu" name="matKhauTK" required>
+
+                    <label for="matKhauTK1"><b>Nhập lại mật khẩu</b></label>
+                    <input type="password" placeholder="Nhập lại mật khẩu" name="matKhauTK1" required>
+                </div>
+                <div id="anh">
+                    <img id="output" class="img-rounded" alt="Ảnh" width="250" height="250" src="~/wwwroot/images/icons/register.png" />&nbsp;<br />&nbsp;
+                    <p><label for="ufile" style="cursor: pointer; font-size: 20px"><strong>Chọn ảnh</strong></label></p>
+                    <input name="ImageFile" id="ufile" type="file" style="display: none" onchange="loadFile(event)" />
+                </div>
+            </div>
+            <div class="clearfix" style="width: 300px; margin-left: 210px">
+                <button type="submit" class="signupbtn">Đăng ký</button>
+            </div>
+        </div>
+    </form>
+    @if (ViewBag.Error != null)
+    {
+        <br />
+        <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+    }
+    &nbsp;
+</div>
+<style type="text/css">
+    #anh {
+        float: right;
+        width: 500px;
+        text-align: center;
+    }
+
+    form {
+        border: 1px solid #ccc;
+    }
+
+    #output {
+        margin-top: 25px;
+    }
+
+    ol[itemtype] {
+        margin: -17px 0px 10px 0px;
+        padding: 0;
+        font-size: 13px;
+        border-bottom: 0.5px solid #ccc;
+        color: #999;
+    }
+
+    .bottommenu {
+        top: -88px;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+    }
+
+    button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+    button:hover {
+        opacity: 1;
+    }
+
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: #f44336;
+    }
+
+    .cancelbtn, .signupbtn {
+        float: left;
+        width: 50%;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+</style>
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
